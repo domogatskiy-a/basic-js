@@ -34,7 +34,7 @@ function getDNSStats( domains ) {
     .map(a => a.split('.').reverse())
     .sort((a,b) => b.length - a.length)[0]
     .forEach((adress, i, arr) => {
-      console.log(adress, arrсв)
+      console.log(adress, arr)
       key = key == '' ? adress : `${key}.${adress}`;
       res[key] = arr.reduce((acc, adr) => console.log(acc, adr, adr.length, adress, adr.length > (i + 1) && adress == adr[i] ? acc++ : acc), 0);
     });
