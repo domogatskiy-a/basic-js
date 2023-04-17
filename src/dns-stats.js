@@ -25,19 +25,18 @@ const { NotImplementedError } = require('../extensions/index.js');
 function getDNSStats( domains ) {
 
   const res = {};
-  let i = 0,
-    key = '';
-
-  if ( domains.length == 0) return {};
   
   domains
     .map(a => a.split('.').reverse())
-    .sort((a,b) => b.length - a.length)[0]
-    .forEach((adress, i, arr) => {
-      console.log(adress, arr)
-      key = key == '' ? adress : `${key}.${adress}`;
-      res[key] = arr.reduce((acc, adr) => console.log(acc, adr, adr.length, adress, adr.length > (i + 1) && adress == adr[i] ? acc++ : acc), 0);
-    });
+    .sort((a,b) => b.length - a.length)
+    .map((adress) => {
+      adress
+      .reduce((s,i) => {
+        const key = `${s}.${i}`;
+        res[key] = res[key] ? res[key] + 1 : 1;
+        return key;
+      },'')
+      });
 
   return res;
 
